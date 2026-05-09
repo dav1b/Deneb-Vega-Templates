@@ -133,6 +133,36 @@ A **shared semantic model** at `_shared/UniversalData.SemanticModel/` avoids dup
 
 ---
 
+## Automation Skills (Planned)
+
+The longer-term vision is a set of Claude Code slash-command skills that turn this template library into a front-end toolkit for autonomously generating Power BI reports with Deneb visuals.
+
+### Tier 1 — Theme integration
+
+| Skill | What it does |
+|---|---|
+| `/apply-pbi-theme` | Maps a PBI theme JSON onto a Deneb template: `dataColors` → Vega `range.category`, `textClasses` → axis/legend/title fonts and sizes, `background` → Vega background. Writes the result into `usermeta.config`. |
+| `/extract-theme-tokens` | Parses a PBI theme and prints a clean summary of its design tokens (palette, fonts, sizes) for inspection. |
+| `/create-vega-config` | Builds a Vega config block from a palette array, font name, and base size — for when you don't have a full PBI theme. |
+
+### Tier 2 — Template manipulation
+
+| Skill | What it does |
+|---|---|
+| `/remap-fields` | Replaces `__0__`, `__1__` etc. with real column names throughout a template spec and updates the `dataset` metadata block. |
+| `/validate-template` | Checks a template against Deneb 1.9.0 structural requirements before import. |
+| `/clone-template` | Copies a template to a new file and optionally remaps fields in one step. |
+
+### Tier 3 — Autonomous generation
+
+| Skill | What it does |
+|---|---|
+| `/suggest-visual` | Given a dataset schema, recommends chart templates from this library that fit, with rationale. |
+| `/generate-pbip` | Scaffolds a full PBIP project for a given template, wired to the universal CSV via the shared semantic model. |
+| `/auto-configure` | Given a dataset schema and a target template: remaps fields, applies a theme, and produces a ready-to-open PBIP. Composes the skills above. |
+
+---
+
 ## Working with Deneb Templates
 
 Read the official Deneb documentation: https://deneb-viz.github.io/templates
