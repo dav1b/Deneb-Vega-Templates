@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "usermeta": {
+    "information": {
+      "uuid": "40849a53-d900-4d89-bfcc-2ebc2b87a2f9",
+      "generated": "2026-05-09T09:51:09.048Z",
+      "previewImageBase64PNG": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAABmCAYAAAAtZrjGAAAL5klEQVR4AexdC2wUxxmevbUxYJwWKKVWHg2NeIRCQlJUlAcVUasqjYTUolT4CA1KKZSUEpARFQkPGRTgbBeHOFBACQYXJ4TSB8VO0jYFnEpVmsZtSh9UNJS0UdoqVQATsKnt251+n+Eu5/Xu+ta+rH3n//R/98/szuzsfPvd3s7O7GxEBfjs3r07f93Gqqmzy+qHC3Kbg1mzjucFkEYyaSBBMdeJ1uJa/b+WFkFuc8Bj3Rt4CYrqnIwNDgNMYAggJgz0yICXoIYi51jgq8ACYAMQraqq+rxhaAoMUTFhoDsDXoK6hKTHgeeAA8CjwIFoNPoreBsQEwZcGfASVCJxHIHLQKcVFxd3aG3ozoh8CQMuDPQkqG5Z8g2rCQsrBSq3OcAB7o0FFlSHNqejoFUClbscaGU2Nt7Dfycc5mDmFNSNyM6LcThVxK9UxOPxAlyUG6nLJCwMpDLgFNSnsJItu/Xwc4EHgVJgI7Cyurr6bnhnHiwSEwauMOAUxzEs3g5QQM/Afx+oAiiwraWlpUdxUW4hLiYMuDLgFJRrIudCrfTfBLnLgfN4B4n3SlC4iDorUDnLQUN5ycogIkpN6yWoAiRia+6j8C5m3KGUIDs4CHacDMPIV334eAmKXS+fwHbvBdj1wgvz1dL1AjbEfBnwEtQF5GoAngdqAV6YxxYtWsSbmoiKCQPuDHgJyjV1UVHRBWnluVIjC68yEEhQzJNvWn9UyqgWZDcHhtLlblBaH1V9+AQWVIdl3qKUfkSQxRxoe1h9LLraC33Qk/IS1BhsFMJRHGCHoJgwkB4DXoLi8vHYxGIgCqwANqPrZSb68mSAHcjoB8uKIikctx19Fwt/BDwJcIAd8eTChQtfRdwGxIQBVwa8BOVMTIG9W1hYGEcrTwbYOdmReJKBdAWVzJBnxn+PbpetAhUKByqiv6Asa0JGYdscHJg8ppkMBBZU3Mq7HaeolQIVCgd5EeMfDZUPvJlpZFJEqdtyCoqD6gimGY2vLhfgzc3N6JLRzjxIJiYMXGHAKQ7eKrgPq3CfSdGz1/kBxNnKW1lTU3OXYSgDcTFhwJUBp6B+jVRHgP1XUQH/LLANkAF2ICETlsvbcAqKdeVjU+cZ8MGfsU6gVBgcgOrsMTdBpbP3bUgkUCoNDvSZhljJ1N7i8OMlfwfXWWN+gvoIanEzMBzg3AapF+ifwTKBUulwAKoGj/kJiq09iuiLoOMxYJ4MsAMLYr4M+AnqHeTkNcJh+DJg/4IFC16HFxMGPBnwE1S3TKNHj34fXS/yGFU3ZmRBgoFAgmIm07D/YGh7m8DeZvTAg1Ka0yC9Qd4GCwILytKRadqIrBD0yMG0hli0jBgsYmI93QT1cay4DuAsdrwwZysPUTFhoGcG3ATFqRBnISsfR/8KPMPfhpfHqECCmD8DboJqRJY6gLcKOLfBiwhzvoNYNBpt1LayERcTBlwZcBOUa0IuLC4utpQhM9iRC4E7A4EExU1EItaJXG3hWXb8+gzia+RrsCGwoGzbvDX3WniRFTjzTnqpYv47mcRgExPrG+HXVfCRqVFXw07X2dJra2tDGhlg5yRH4h8wkCqoT2LxfGA2wGmkV8MvAzhZxlL40h07dtwpA+zAhJgnAxTUCKx9HOBzeNXw9cAWIAY8BXCyDA5qr5IZ7MCGmC8DFNQlpFgLUEhwadnvkCrXgCqJ9ZUBCopnKI7roU93e5yQLJdwtj4W/VK6lZd03gxQUFzLLpZ7GPAA14+sqanBRXlniin4ziWgOmKZYICCKsSG7gJ+C3gZn4a5Pz8/fzzua5peiQbActmFfmaAgmrBPrwF0MO5Gp+GeXrOnDlM55pAFgoDZICC4t/ZvxGhh/O2wsLCizLAzpsfWaM654f6D4igmOgR9DczYr1ha1U1UKCUgU7sPoMd4ko+fWeAZygOT+GDCMXpbM6yzdsihiodCMgzdHNDbO6WTCCdukuanhmgoPjr3IykF4FUux6RSQDPXgSCYsKAPwMUFFPw7443OBlOgE8Pz0SkBPg6UCqPUYEFMV8GEoJyS0SBPY0VBGeyq1q6dOnxsC7KUa5YFjLgJ6hu1SkoKJDRmt1YkQWpDAQSFDPmReJ/UkqjE7l/canDHvN+h97JfRIMHAYCCypu501VynikX6GNosat894jlHwGFANegmLHL7tbOLCO/Xd8pEqdP38ece2VZ0BVTHamfxjwEgeEo/g6WM5RzrnKOdguunfv3jtkgF3/HKhsKdVLULxl8D1UYg/AFh4H4B2QAXZgQ8yXAS9B+WbCRfmraUPpDyFtD7snq/uNgV4JSis1OgzYtnq+IRa9sxvKS3ijtd9Ik4K9GUgVFC+8OWguMXKT11HscqHvsgVDGRPCQJdCJZIVDKQKaij2mK+F5cjNeQhzOum58Ow85hlhmXS9gA0xXwZSBcWull8iNR9WeA6eXS7PwHNugxfgf7B8+fLXcGbCvx1iYsKACwOpgnJZnVzU+fIg0zQv2Vomy0iyIoFuDKQrqGRG07SakKmyrzCULu0JyUIlkDUMQBfp7uuVdJZlTkcP8aq+QS+oj0Wf6AkvVkTRZ3ilXPnODgbcBMXWHrtdOE85a8E4XyTEsEAY8GXATVDM8DF83QtwcN398A8CMsAOJIj5M+AmqDiyHAP4ili27n6K8BNAVTQaPSYD7MCEmCcDboJKJKawOM6cLxPqXFZcXCy3DDqZkC8vBvwE5ZrHjFh/wQrOuRkIhhGJGUMLC69gxDhsQywHGQgsKMs2Pw0eOCtwIGhlxevLZrcmgG2I5QgDqdXwExRbd6mtPdXa2lqojM6HQ5V8hAE3BvwExb49Pvz5MDJ2DrKrq6ubgpuRBuJiwoArA36CYt/ez5Hru8B+ILZ48eLXpJUHJsQ8GfATVCITW3vJlp5h6A6l9CvBkdic+FxmIB1Bdak/zlD5yjBuCAKtVXvDlui6LhuSSE4y4BQUn3a5FTXlK2HhFAfY0XeFVuNUEHTNLbEcZsApKI7O5G2B+1BnPunCaaXZ/fIY4zLADizksmWgbk5Bncc2ObjuMDynleasLD9EmF0vsSVLlvxGK3nXC/gQ82DAKSi3ZMmL8uHDh7fgr852SyTLhAEykI6gmC6JfNNqUoaqcIOhjVW4AP+WE0oZP1HyGRQMBBZUh2VOx1nqO26It7bUvlBestMNg4JNqWS3bhR2tyQepWJ4mHAkDARhwHmGYnfLWGxgEfANYCXATuA18FFp5YEFMV8GnIJid8tR5GCrbhc85zTgMJVNCMvcBiAhO6z/9tIpqP7bEyk5JxgILKg8w/orLsh3doFS2xticyMvPfXQeznBilSi1wwEFlRcmzfjlsHDXdBZvKGV3PRUg/3jJyi28NjSY38e/bBz586NgJD88gx2Pgd9/f3EMQbs8PWw7MtbxfC+fftmyAA7MCHmyYCfoN5GLs5gx0kz+MrYXTKDHRgR82XAT1AeGe1WrfXLqfBIKIv7zkDWbSGQoFpaWvLuHvWvRz836u1lqZg58p/by8vLJ4aFzZs3z9i0adOUsMpzK6eiouJ27ofburCWofzJwIywyvMqBze8p1ZXV3MsXbeuF99fxJEjR/SePXsu19bWvnX58uU3w0RTU9Pp9evX22vWrBl18ODBS5WVlflr164dtm7dOoPrwtgX1hvlmcCQXbt2mXV1de3cB6CI68LYB5axcePGZpR5DX5UQ2pqatq5P8SGDRsucn1YwPGweDxQdxvhyRDPLYHOUI2NjQWnTp265uTJk0PKysrsMHHo0CGrra3ts/F4/KYTJ07c2NzcPK6jo2N8e3v7DVg3NIx9Qb01yrsWGH/mzJmxiF+HfbgNuAnh0DjBP4VGmdPgJ54+fXoU9mcS0draem0YPFwtYySOx0wcjwmJ4wFBTQwkKGS4ABwD2EUDF7o9ixLrgJ8BHBJzCP4XgN/rbbE6Y9aBLb0M/BjgvA+c3W8vwgeBMDn5L8pjY4nlvoIweSBeRzgsO4uCWPda+OTxCCoo5B0QZmEvNBCmTUNhfN3bcvhvAg8BXwbKAQqMnenzEeZo1xHwYRkHQIZVllc5yePxfwAAAP//Jgt5rQAAAAZJREFUAwAmBz6Gc2qwYQAAAABJRU5ErkJggg==",
+      "name": "interactive-bar-chart-template",
+      "description": "[No Description Provided]",
+      "author": "[No Author Details Provided]"
+    },
+    "deneb": {
+      "build": "1.9.0",
+      "metaVersion": 1,
+      "provider": "vega",
+      "providerVersion": "6.2.0"
+    },
+    "interactivity": {
+      "tooltip": true,
+      "contextMenu": true,
+      "selection": true,
+      "selectionMode": "simple",
+      "highlight": true,
+      "dataPointLimit": 50
+    },
+    "config": "{\n  \"autosize\": {\n    \"contains\": \"padding\",\n    \"type\": \"fit\"\n  }\n}",
+    "dataset": [
+      {
+        "key": "__0__",
+        "name": "L2-Category",
+        "description": "",
+        "kind": "column",
+        "type": "text"
+      },
+      {
+        "key": "__1__",
+        "name": "Sum of Value",
+        "description": "",
+        "kind": "measure",
+        "type": "numeric"
+      }
+    ]
+  },
+  "data": [
+    {
+      "name": "dataset"
+    }
+  ],
+  "scales": [
+    {
+      "name": "yscale",
+      "type": "band",
+      "domain": {
+        "data": "dataset",
+        "field": "__0__"
+      },
+      "range": "height",
+      "padding": 0.1,
+      "round": true
+    },
+    {
+      "name": "xscale",
+      "domain": {
+        "data": "dataset",
+        "field": "__1__"
+      },
+      "nice": true,
+      "range": "width"
+    }
+  ],
+  "axes": [
+    {
+      "scale": "xscale",
+      "orient": "bottom",
+      "title": "__1__",
+      "tickCount": 5
+    },
+    {
+      "orient": "left",
+      "scale": "yscale",
+      "title": "__0__"
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "dataset"
+      },
+      "encode": {
+        "enter": {
+          "tooltip": {
+            "signal": "{'L2-Category': datum['__0__'], 'Sum of Value': datum['__1__']}"
+          },
+          "x": {
+            "scale": "xscale",
+            "field": "__1__"
+          },
+          "x2": {
+            "scale": "xscale",
+            "value": 0
+          },
+          "y": {
+            "scale": "yscale",
+            "field": "__0__"
+          },
+          "height": {
+            "scale": "yscale",
+            "band": 1
+          },
+          "opacity": {
+            "value": 0.3
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "dataset"
+      },
+      "encode": {
+        "enter": {
+          "tooltip": {
+            "signal": "{'L2-Category': datum['__0__'], 'Sum of Value': datum['__1__']}"
+          },
+          "x": {
+            "scale": "xscale",
+            "field": "__1____highlight"
+          },
+          "x2": {
+            "scale": "xscale",
+            "value": 0
+          },
+          "y": {
+            "scale": "yscale",
+            "field": "__0__"
+          },
+          "height": {
+            "scale": "yscale",
+            "band": 1
+          },
+          "opacity": [
+            {
+              "test": "datum.__selected__ == 'off'",
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
