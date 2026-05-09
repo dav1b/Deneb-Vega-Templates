@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "deneb-template"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "716f767c-eeed-4f3d-9a0d-512b670ee486"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir Z:\\\\Desktop\\\\Projects\\\\PowerBI\\\\powerbi-ai-projects\\\\deneb-template-cleanup\\\\change-over-time *)",
+      "Bash(dir Z:\\\\Desktop\\\\Projects\\\\PowerBI\\\\powerbi-ai-projects\\\\deneb-template-cleanup\\\\magnitude *)",
+      "Bash(python3 *)",
+      "Bash(python -c \"import openpyxl; print\\('ok'\\)\")",
+      "Bash(py -3 -c \"import openpyxl; print\\('ok'\\)\")"
+    ]
+  }
+}

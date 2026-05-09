@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "deneb-template"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0e8aad42-d36d-4359-b8b5-a2b03dc96158"
+  }
+}
