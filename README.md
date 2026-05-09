@@ -86,31 +86,124 @@ The universal dataset covers the field requirements of all non-spatial templates
 
 ## Power BI Project Files (PBIP)
 
-### Plan
+### What a PBIP is
 
-Each chart template will be accompanied by a Power BI Project (`.pbip`) file in its folder. A PBIP is a human-readable, source-control-friendly alternative to the binary `.pbix` format, introduced in Power BI Desktop as a developer-first authoring experience.
+A PBIP is a human-readable, source-control-friendly alternative to the binary `.pbix` format. It is a folder of JSON and TMDL files that Power BI Desktop reads directly. Each chart in this library gets its own PBIP, generated automatically by a script from the template file and the universal dataset.
 
-**Structure per chart:**
+### Actual file structure (derived from manual example)
 
 ```
 change-over-time/
-├── line.deneb-template.json        ← original Vega template
-├── line.pbip                       ← Power BI project entry point
+├── line.deneb-template.json              ← source Vega template (input to generator)
+├── line.pbip                             ← entry point; references Report folder
 ├── line.Report/
-│   ├── definition.pbir
-│   ├── report.json
-│   └── pages/
-│       └── ReportPage/
-│           ├── page.json
-│           └── visuals/
-│               └── DenebVisual/
-│                   └── visual.json ← Deneb configured with this template
-└── line.SemanticModel/             ← references _data/universal.csv
+│   ├── .platform                         ← Fabric metadata; unique logicalId per PBIP
+│   ├── definition.pbir                   ← links Report → SemanticModel by relative path
+│   ├── StaticResources/SharedResources/
+│   │   └── BaseThemes/CY26SU04.json      ← base PBI theme (static)
+│   └── definition/
+│       ├── report.json                   ← Deneb visual GUID, theme ref, settings (static)
+│       ├── version.json                  ← static
+│       └── pages/
+│           ├── pages.json                ← page order (static; same page ID reused)
+│           └── {pageId}/
+│               ├── page.json             ← 1280×720 canvas (static)
+│               └── visuals/
+│                   └── {visualId}/
+│                       └── visual.json   ← GENERATED: field bindings + Vega spec
+└── line.SemanticModel/
+    ├── .platform                         ← Fabric metadata; unique logicalId per PBIP
     ├── definition.pbism
-    └── model.bim
+    ├── diagramLayout.json
+    └── definition/
+        ├── model.tmdl                    ← static
+        ├── database.tmdl                 ← static
+        ├── relationships.tmdl            ← static (date table relationship)
+        ├── cultures/en-US.tmdl           ← static
+        └── tables/
+            ├── universal.tmdl            ← CSV path injected at generation time
+            ├── DateTableTemplate_*.tmdl  ← static (auto date table)
+            └── LocalDateTable_*.tmdl     ← static (auto date table)
 ```
 
-A **shared semantic model** at `_shared/UniversalData.SemanticModel/` avoids duplicating the model definition across every chart. Each PBIP report references it via relative path.
+### Generator architecture
+
+PBIPs are produced by a PowerShell generator script (`_shared/generate-pbips.ps1`) driven by a manifest file (`_shared/pbip-manifest.json`). Static boilerplate lives in `_shared/pbip-scaffold/` and is copied verbatim; only `visual.json` and name tokens are generated dynamically.
+
+#### What changes per template
+
+| File | What changes | How |
+|---|---|---|
+| `.pbip` | Report folder path string | Name substitution |
+| `definition.pbir` | SemanticModel folder path string | Name substitution |
+| `.platform` (×2) | `displayName` + `logicalId` | Name substitution + fresh UUID |
+| `universal.tmdl` | Absolute path to `_data/universal.csv` | Injected at generation time (see below) |
+| `visual.json` | Field projections + Vega spec | Generated from template + manifest |
+
+Everything else is copied unchanged from the scaffold.
+
+#### The manifest (`_shared/pbip-manifest.json`)
+
+Each entry declares which universal columns bind to which template dataset fields. For fields where the template name exactly matches a universal column (`Date`, `L1-Category`, etc.) the generator infers the binding automatically. For aliases (`Category` → `L2-Category`, `Value X` → `Value`) the manifest provides an explicit override.
+
+```json
+{
+  "change-over-time/line": {
+    "fields": {
+      "Date":         { "kind": "column",  "source": "Date" },
+      "Sum of Value": { "kind": "measure", "source": "Value", "fn": "Sum" }
+    },
+    "sort": { "field": "Date", "direction": "Ascending" }
+  },
+  "correlation/scatterplot": {
+    "fields": {
+      "Category": { "kind": "column",  "source": "L2-Category" },
+      "Value X":  { "kind": "measure", "source": "Value",   "fn": "Sum" },
+      "Value Y":  { "kind": "measure", "source": "Value 2", "fn": "Sum" }
+    },
+    "sort": { "field": "Category", "direction": "Ascending" }
+  }
+}
+```
+
+Templates not in the manifest are skipped by the generator with a warning.
+
+#### How `visual.json` is built
+
+1. The Vega spec is read from the template file. Placeholder field names (`__0__`, `__1__`, …) are replaced with the real field names from `usermeta.dataset` (e.g. `__0__` → `"Date"`, `__1__` → `"Sum of Value"`).
+2. The result is JSON-encoded as a single-quoted string literal (PBI's format for `jsonSpec`): internal single quotes become `'`, line endings become `\r\n`.
+3. The `projections` array is built from the manifest: `kind: "column"` entries become `Column` projections; `kind: "measure"` entries become `Aggregation` projections (Function 0 = Sum).
+4. Interactivity flags and `jsonConfig` are taken directly from `usermeta.interactivity` and `usermeta.config`.
+
+#### ID consistency
+
+| ID | Scope | Strategy |
+|---|---|---|
+| Page name / folder (`{pageId}`) | Internal to one report | Pinned constant — reused across all PBIPs |
+| Visual name / folder (`{visualId}`) | Internal to one page | Pinned constant — reused across all PBIPs |
+| `logicalId` in `.platform` | Fabric Git integration | Fresh UUID generated per PBIP |
+| Column `lineageTag` UUIDs in `universal.tmdl` | Fabric column tracking | Pinned — SemanticModel is identical in every PBIP |
+| Relationship UUID in `relationships.tmdl` | Internal | Pinned |
+
+#### Dynamic CSV path
+
+The absolute path to `_data/universal.csv` is injected into `universal.tmdl` at generation time. The generator detects the repo root from its own location (`$PSScriptRoot`) so it works correctly regardless of where the repo is checked out — no manual path editing required. If you open a generated PBIP on a different machine, run `generate-pbips.ps1` once to re-stamp the correct path for that machine.
+
+#### Known fragile points
+
+1. **Spec string encoding** — the Vega spec must be serialised as a single-quoted PBI string literal with exact escaping. A single wrong character produces a silently empty visual. Validate by diffing the generated `visual.json` against the manual reference file before bulk generation.
+2. **PBI schema drift** — `report.json`, `page.json`, and `visual.json` reference versioned Microsoft JSON schemas. If Power BI Desktop updates these schemas, the scaffold may need updating. Check after major PBI Desktop releases.
+
+#### Testing sequence
+
+1. Generate PBIP for **line chart** — diff `visual.json` byte-for-byte against `manual-example-line-chart/` reference
+2. Open in Power BI Desktop — visual renders, data loads
+3. Generate PBIP for **bar chart** — different field types, no sort on date
+4. Generate PBIP for **scatterplot** — three fields, manifest alias override
+5. Open both in Power BI Desktop
+6. If all three pass, generate the remaining templates
+
+Test output goes to `_test-output/` (gitignored). Do not commit generated PBIPs until the test sequence passes.
 
 ### Status
 
